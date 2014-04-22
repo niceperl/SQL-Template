@@ -46,5 +46,11 @@
 		</st:if>
 	</st:select>	
 	
+	<st:select name="count_people" >
+		SELECT COUNT(*) FROM PERSON 
+		<st:if test="${ID}" prepend="WHERE">
+			ID=${ID}
+		</st:if>
+	</st:select>
 	
 </st:sql>

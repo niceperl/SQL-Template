@@ -1,18 +1,13 @@
-#!perl -T
 use strict;
-use Test::More tests => 26;
+use Test::More tests => 28;
 
-BEGIN {
-	use_ok( 'SQL::Template' );	
-	use_ok( 'DBI' );
-	use_ok( 'DBD::SQLite' ) or die "DBD::SQLite is required for testing";
-}
 
-END {
-	
-}
+use_ok( 'SQL::Template' );	
+use_ok( 'DBI' );
+use_ok( 'DBD::SQLite' ) or die "DBD::SQLite is required for testing";
 
-my $dbh =DBI->connect("dbi:SQLite:dbname=./t/db/sqltemplate.sqlite","","", {AutoCommit=>0});
+
+my $dbh = DBI->connect("dbi:SQLite:dbname=./t/db/sqltemplate.sqlite","","", {AutoCommit=>0});
 
 ok( defined($dbh), "DB Connection established");
 
@@ -69,6 +64,12 @@ else {
 }
 $stmt->finish;
 
+
+my ($count) = $sql->selectrow_array("count_people", $dbh, {ID=>2} );
+ok( $count == 1, "Record count 1 with ID=2");
+
+my ($count_all) = $sql->selectrow_array("count_people", $dbh );
+ok( $count_all == 7, "Table record count 7");
 
 $dbh->commit;
 $dbh->disconnect;
