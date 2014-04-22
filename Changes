@@ -1,5 +1,8 @@
 Revision history for SQL-Template
 
+0.2.2   22/04/2014
+	    Improved test suite
+	    
 0.2.1   21/04/2014
 	    Add missing dependencies to testing process
 	    
